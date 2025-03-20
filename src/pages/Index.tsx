@@ -6,6 +6,7 @@ import HeroSection from '@/components/home/HeroSection';
 import TrendingPhones from '@/components/home/TrendingPhones';
 import FeaturedComparisons from '@/components/home/FeaturedComparisons';
 import PopularSearches from '@/components/home/PopularSearches';
+import WebCrawler from '@/components/webCrawler/WebCrawler';
 
 const Index: React.FC = () => {
   // Scroll to top when component mounts
@@ -22,6 +23,7 @@ const Index: React.FC = () => {
         <TrendingPhones />
         <FeaturedComparisons />
         <PopularSearches />
+        <WebCrawler />
       </main>
       
       <Footer />
