@@ -1,10 +1,9 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { getPhoneById, getMostMentionedPhones, Phone } from '@/utils/mockData';
-import { ArrowLeft, Star, Share2, Heart, Phone as PhoneIcon, Battery, Cpu, Memory, Camera } from 'lucide-react';
+import { ArrowLeft, Star, Share2, Heart, Phone as PhoneIcon, Battery, Cpu, Database, Camera } from 'lucide-react';
 import PhoneCard from '@/components/ui/PhoneCard';
 
 const PhoneDetails: React.FC = () => {
@@ -163,7 +162,7 @@ const PhoneDetails: React.FC = () => {
                   
                   <div className="flex items-center p-3 bg-muted/30 rounded-lg">
                     <div className="mr-3 p-2 bg-primary/10 rounded-full">
-                      <Memory className="w-5 h-5 text-primary" />
+                      <Database className="w-5 h-5 text-primary" />
                     </div>
                     <div>
                       <p className="text-xs text-muted-foreground">Memory</p>
