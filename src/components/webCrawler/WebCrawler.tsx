@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/Card";
-import { WebCrawlerService } from '@/utils/WebCrawlerService';
+import { WebCrawlerService } from '@/utils/webcrawler';
 import { Link } from 'react-router-dom';
 import { InfoIcon, ServerIcon } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
