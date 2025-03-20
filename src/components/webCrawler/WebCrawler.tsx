@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/Card";
 import { WebCrawlerService } from '@/utils/WebCrawlerService';
 import { Link } from 'react-router-dom';
-import { InfoIcon } from 'lucide-react';
+import { InfoIcon, ServerIcon } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 // Import refactored components
 import ApiKeyInput from './components/ApiKeyInput';
@@ -30,6 +31,7 @@ const WebCrawler: React.FC = () => {
   const [progress, setProgress] = useState(0);
   const [crawlResult, setCrawlResult] = useState<CrawlResult | null>(null);
   const [apiKey, setApiKey] = useState('');
+  const [useSimulation, setUseSimulation] = useState(true);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,8 +69,13 @@ const WebCrawler: React.FC = () => {
         });
       }, 800);
       
-      // Call the actual crawling service
-      const result = await WebCrawlerService.crawlWebsite(url, apiKey);
+      // Call the actual crawling service or simulation based on user choice
+      let result;
+      if (useSimulation) {
+        result = await WebCrawlerService.simulateCrawl(url);
+      } else {
+        result = await WebCrawlerService.crawlWebsite(url, apiKey);
+      }
       
       clearInterval(interval);
       setProgress(100);
@@ -105,17 +112,42 @@ const WebCrawler: React.FC = () => {
       <Card className="max-w-4xl mx-auto">
         <CardHeader>
           <div className="flex items-center justify-between">
-            <CardTitle className="text-2xl font-bold">Web Crawler (Shaurya)</CardTitle>
-            <Link to="/crawler/backend-info" className="inline-flex items-center text-sm text-blue-600 hover:text-blue-800">
-              <InfoIcon className="h-4 w-4 mr-1" />
-              Backend Integration
-            </Link>
+            <CardTitle className="text-2xl font-bold">Web Crawler</CardTitle>
+            <div className="flex gap-4">
+              <Link to="/crawler/backend-info" className="inline-flex items-center text-sm text-blue-600 hover:text-blue-800">
+                <ServerIcon className="h-4 w-4 mr-1" />
+                Spring Boot Integration
+              </Link>
+            </div>
           </div>
           <CardDescription>
-            This crawler currently runs with simulated data. See Backend Integration for Spring Boot setup.
+            Crawl websites to extract and analyze smartphone information.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
+          <Tabs 
+            defaultValue={useSimulation ? "simulation" : "backend"} 
+            onValueChange={(value) => setUseSimulation(value === "simulation")}
+            className="w-full"
+          >
+            <TabsList className="grid w-full grid-cols-2 mb-4">
+              <TabsTrigger value="simulation">Use Simulation</TabsTrigger>
+              <TabsTrigger value="backend">Use Real Backend</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="simulation">
+              <div className="p-3 bg-amber-50 text-amber-800 rounded-md mb-4 text-sm">
+                <p>Simulation mode uses mock data that mimics a real backend response. No actual crawling is performed.</p>
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="backend">
+              <div className="p-3 bg-blue-50 text-blue-800 rounded-md mb-4 text-sm">
+                <p>This mode connects to your Spring Boot backend at <strong>http://localhost:8081</strong>. Make sure your backend is running.</p>
+              </div>
+            </TabsContent>
+          </Tabs>
+          
           <ApiKeyInput apiKey={apiKey} setApiKey={setApiKey} />
           
           <form onSubmit={handleSubmit} className="space-y-4">
