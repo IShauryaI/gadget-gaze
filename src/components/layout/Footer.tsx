@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Instagram, Linkedin, Github, Mail, MapPin, Phone } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Linkedin, Github, Mail, MapPin, Phone, Code } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
@@ -101,34 +101,58 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Contact Information */}
+          {/* Data Analysis Tools */}
           <div className="space-y-4">
-            <h3 className="font-semibold text-lg">Contact Us</h3>
+            <h3 className="font-semibold text-lg">Our Toolbox</h3>
             <ul className="space-y-3">
               <li className="flex items-start">
-                <MapPin className="w-5 h-5 text-muted-foreground mr-3 mt-0.5" />
+                <Code className="w-5 h-5 text-muted-foreground mr-3 mt-0.5" />
                 <span className="text-sm text-muted-foreground">
-                  123 Tech Plaza, Digital Valley<br />
-                  San Francisco, CA 94101
+                  WebCrawler(Shaurya) - Data Collection
                 </span>
               </li>
-              <li className="flex items-center">
-                <Phone className="w-5 h-5 text-muted-foreground mr-3" />
+              <li className="flex items-start">
+                <Code className="w-5 h-5 text-muted-foreground mr-3 mt-0.5" />
                 <span className="text-sm text-muted-foreground">
-                  +1 (555) 123-4567
+                  HTMLParser(Shaurya) - Raw Data Processing
                 </span>
               </li>
-              <li className="flex items-center">
-                <Mail className="w-5 h-5 text-muted-foreground mr-3" />
+              <li className="flex items-start">
+                <Code className="w-5 h-5 text-muted-foreground mr-3 mt-0.5" />
                 <span className="text-sm text-muted-foreground">
-                  info@gadgetgaze.com
+                  TextAnalyser(Shaurya) - Content Analysis
+                </span>
+              </li>
+              <li className="flex items-start">
+                <Code className="w-5 h-5 text-muted-foreground mr-3 mt-0.5" />
+                <span className="text-sm text-muted-foreground">
+                  SpellChecker(Aiswariya) - Data Accuracy
                 </span>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-12 pt-6 border-t border-border">
+        {/* Additional Tools Section */}
+        <div className="mt-8 pt-6 border-t border-border">
+          <h3 className="font-semibold text-lg mb-4">Advanced Data Tools</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="p-4 bg-muted/50 rounded-lg">
+              <h4 className="font-medium text-sm mb-2">WordCompletion(Shrinicketh)</h4>
+              <p className="text-xs text-muted-foreground">Prefix Tree implementation for intelligent word suggestions and auto-complete functionality.</p>
+            </div>
+            <div className="p-4 bg-muted/50 rounded-lg">
+              <h4 className="font-medium text-sm mb-2">FrequencyCount(Tanjina)</h4>
+              <p className="text-xs text-muted-foreground">Boyer-Moore algorithm implementation for efficient pattern matching and frequency analysis.</p>
+            </div>
+            <div className="p-4 bg-muted/50 rounded-lg">
+              <h4 className="font-medium text-sm mb-2">SearchFrequency(Shaurya)</h4>
+              <p className="text-xs text-muted-foreground">Knuth-Morris-Pratt implementation for tracking and analyzing search patterns.</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-8 pt-6 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-muted-foreground">
               © {new Date().getFullYear()} GadgetGaze. All rights reserved.
