@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { WebCrawlerService } from '@/utils/WebCrawlerService';
 
 interface CrawlResult {
   success: boolean;
@@ -41,57 +42,47 @@ const WebCrawler: React.FC = () => {
     setCrawlResult(null);
     
     try {
-      // Simulate API call for demo purposes
+      // Save the API key
+      WebCrawlerService.saveApiKey(apiKey);
+      
       toast({
         title: "Crawling Started",
         description: "Processing your request...",
       });
       
-      // Simulate progress
+      // Simulate progress with intervals
       const interval = setInterval(() => {
         setProgress(prev => {
           const newProgress = prev + 15;
-          if (newProgress >= 100) {
+          if (newProgress >= 90) {
             clearInterval(interval);
-            return 100;
+            return 90;
           }
           return newProgress;
         });
       }, 800);
       
-      // Simulate API response after delay
-      setTimeout(() => {
-        clearInterval(interval);
-        setProgress(100);
-        setIsLoading(false);
-        
-        const mockResult: CrawlResult = {
-          success: true,
-          status: "completed",
-          completed: 15,
-          total: 15,
-          creditsUsed: 15,
-          expiresAt: new Date(Date.now() + 86400000).toISOString(),
-          data: [
-            {
-              url: url,
-              title: "Sample Page Title",
-              content: "This is sample crawled content from the website...",
-              metadata: {
-                description: "Sample meta description",
-                keywords: ["sample", "crawler", "web"]
-              }
-            }
-          ]
-        };
-        
-        setCrawlResult(mockResult);
+      // Call the actual crawling service
+      const result = await WebCrawlerService.crawlWebsite(url, apiKey);
+      
+      clearInterval(interval);
+      setProgress(100);
+      setIsLoading(false);
+      
+      if (result.success) {
+        setCrawlResult(result);
         
         toast({
           title: "Crawling Complete",
           description: "Website successfully crawled",
         });
-      }, 3000);
+      } else {
+        toast({
+          title: "Error",
+          description: (result as any).error || "Failed to crawl website",
+          variant: "destructive",
+        });
+      }
     } catch (error) {
       console.error('Error crawling website:', error);
       setIsLoading(false);
@@ -108,7 +99,7 @@ const WebCrawler: React.FC = () => {
     <div className="container mx-auto py-8 px-4">
       <Card className="max-w-2xl mx-auto">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold">Web Crawler</CardTitle>
+          <CardTitle className="text-2xl font-bold">Web Crawler (Shaurya)</CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
           <div>
