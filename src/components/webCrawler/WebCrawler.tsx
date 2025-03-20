@@ -6,6 +6,15 @@ import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { 
+  Table, 
+  TableBody, 
+  TableCell, 
+  TableHead, 
+  TableHeader, 
+  TableRow 
+} from "@/components/ui/table";
 import { WebCrawlerService } from '@/utils/WebCrawlerService';
 
 interface CrawlResult {
@@ -97,7 +106,7 @@ const WebCrawler: React.FC = () => {
 
   return (
     <div className="container mx-auto py-8 px-4">
-      <Card className="max-w-2xl mx-auto">
+      <Card className="max-w-4xl mx-auto">
         <CardHeader>
           <CardTitle className="text-2xl font-bold">Web Crawler (Shaurya)</CardTitle>
         </CardHeader>
@@ -151,7 +160,7 @@ const WebCrawler: React.FC = () => {
             </Button>
           </form>
           
-          {crawlResult && (
+          {crawlResult && crawlResult.data && crawlResult.data.length > 0 && (
             <div className="mt-6 space-y-4">
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-semibold">Crawl Results</h3>
@@ -171,14 +180,124 @@ const WebCrawler: React.FC = () => {
                 </div>
               </div>
               
-              <div className="space-y-2">
-                <h4 className="font-medium">Content Preview:</h4>
-                <div className="bg-muted/20 p-3 rounded-md max-h-80 overflow-auto">
-                  <pre className="text-sm whitespace-pre-wrap">
-                    {JSON.stringify(crawlResult.data, null, 2)}
-                  </pre>
-                </div>
-              </div>
+              <Tabs defaultValue="content" className="w-full">
+                <TabsList className="grid grid-cols-5 mb-4">
+                  <TabsTrigger value="content">Content</TabsTrigger>
+                  <TabsTrigger value="text-analysis">Text Analysis</TabsTrigger>
+                  <TabsTrigger value="spelling">Spell Check</TabsTrigger>
+                  <TabsTrigger value="suggestions">Word Completion</TabsTrigger>
+                  <TabsTrigger value="frequencies">Word Frequencies</TabsTrigger>
+                </TabsList>
+                
+                <TabsContent value="content" className="space-y-4">
+                  <h4 className="font-medium">Content Preview:</h4>
+                  <div className="bg-muted/20 p-3 rounded-md max-h-80 overflow-auto">
+                    <h5 className="font-medium">{crawlResult.data[0].title}</h5>
+                    <p className="mt-2">{crawlResult.data[0].content}</p>
+                  </div>
+                </TabsContent>
+                
+                <TabsContent value="text-analysis" className="space-y-4">
+                  <h4 className="font-medium">Text Analysis (TextAnalyser):</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <Card>
+                      <CardHeader className="py-2">
+                        <CardTitle className="text-sm">Phone Numbers</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <ul className="list-disc pl-5 text-sm">
+                          {crawlResult.data[0].analysis.phoneNumbers.map((phone: string, i: number) => (
+                            <li key={i}>{phone}</li>
+                          ))}
+                        </ul>
+                      </CardContent>
+                    </Card>
+                    
+                    <Card>
+                      <CardHeader className="py-2">
+                        <CardTitle className="text-sm">Email Addresses</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <ul className="list-disc pl-5 text-sm">
+                          {crawlResult.data[0].analysis.emailAddresses.map((email: string, i: number) => (
+                            <li key={i}>{email}</li>
+                          ))}
+                        </ul>
+                      </CardContent>
+                    </Card>
+                    
+                    <Card>
+                      <CardHeader className="py-2">
+                        <CardTitle className="text-sm">URLs</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <ul className="list-disc pl-5 text-sm">
+                          {crawlResult.data[0].analysis.urls.map((url: string, i: number) => (
+                            <li key={i} className="break-all">{url}</li>
+                          ))}
+                        </ul>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </TabsContent>
+                
+                <TabsContent value="spelling" className="space-y-4">
+                  <h4 className="font-medium">Spell Checking (SpellChecker):</h4>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Original</TableHead>
+                        <TableHead>Suggested</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {crawlResult.data[0].spellingCorrections.map((correction: any, i: number) => (
+                        <TableRow key={i}>
+                          <TableCell className="font-mono">{correction.original}</TableCell>
+                          <TableCell className="font-mono">{correction.suggested}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TabsContent>
+                
+                <TabsContent value="suggestions" className="space-y-4">
+                  <h4 className="font-medium">Word Completion (WordCompletion):</h4>
+                  <div className="bg-muted/20 p-3 rounded-md">
+                    <p className="mb-2">Suggestions for prefix "ph":</p>
+                    <div className="flex flex-wrap gap-2">
+                      {crawlResult.data[0].searchSuggestions.map((suggestion: string, i: number) => (
+                        <Badge key={i} variant="outline">{suggestion}</Badge>
+                      ))}
+                    </div>
+                  </div>
+                </TabsContent>
+                
+                <TabsContent value="frequencies" className="space-y-4">
+                  <h4 className="font-medium">Word Frequencies (FrequencyCount):</h4>
+                  <div className="bg-muted/20 p-3 rounded-md max-h-80 overflow-auto">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Word</TableHead>
+                          <TableHead>Frequency</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {Object.entries(crawlResult.data[0].wordFrequencies)
+                          .sort(([, a]: any, [, b]: any) => b - a)
+                          .map(([word, count]: [string, any], i: number) => (
+                            <TableRow key={i}>
+                              <TableCell>{word}</TableCell>
+                              <TableCell>{count}</TableCell>
+                            </TableRow>
+                          ))
+                        }
+                      </TableBody>
+                    </Table>
+                  </div>
+                </TabsContent>
+              </Tabs>
             </div>
           )}
         </CardContent>
