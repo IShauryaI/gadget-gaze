@@ -1,4 +1,12 @@
 
-// Export everything from the WebCrawlerService for backward compatibility
-export * from './WebCrawlerService';
+// Main service export
+export { WebCrawlerService } from './WebCrawlerService';
+
+// Utility classes exports
+export { TextAnalyzer } from './TextAnalyzer';
+export { SpellChecker } from './SpellChecker';
+export { WordCompletion } from './WordCompletion';
+export { FrequencyAnalyzer } from './FrequencyAnalyzer';
+
+// Types exports
 export * from './types';
