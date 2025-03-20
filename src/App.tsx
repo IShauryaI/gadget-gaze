@@ -1,33 +1,27 @@
 
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from '@/pages/HomePage';
+import PhoneDetailsPage from '@/pages/PhoneDetailsPage';
+import ComparePage from '@/pages/ComparePage';
+import Search from '@/pages/Search';
+import NotFound from '@/pages/NotFound';
 import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import Compare from "./pages/Compare";
-import Search from "./pages/Search";
-import PhoneDetails from "./pages/PhoneDetails";
-import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
+// App component
+const App: React.FC = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/phone/:id" element={<PhoneDetailsPage />} />
+        <Route path="/compare" element={<ComparePage />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
       <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/compare" element={<Compare />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/phone/:id" element={<PhoneDetails />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+    </Router>
+  );
+};
 
 export default App;

@@ -8,7 +8,7 @@ import FeaturedComparisons from '@/components/home/FeaturedComparisons';
 import PopularSearches from '@/components/home/PopularSearches';
 import WebCrawler from '@/components/webCrawler/WebCrawler';
 
-const Index: React.FC = () => {
+const HomePage: React.FC = () => {
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -31,4 +31,4 @@ const Index: React.FC = () => {
   );
 };
 
-export default Index;
+export default HomePage;
