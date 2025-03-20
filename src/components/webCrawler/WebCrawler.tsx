@@ -4,7 +4,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card";
+import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
@@ -16,6 +16,8 @@ import {
   TableRow 
 } from "@/components/ui/table";
 import { WebCrawlerService } from '@/utils/WebCrawlerService';
+import { Link } from 'react-router-dom';
+import { InfoIcon } from 'lucide-react';
 
 interface CrawlResult {
   success: boolean;
@@ -108,7 +110,16 @@ const WebCrawler: React.FC = () => {
     <div className="container mx-auto py-8 px-4">
       <Card className="max-w-4xl mx-auto">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold">Web Crawler (Shaurya)</CardTitle>
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-2xl font-bold">Web Crawler (Shaurya)</CardTitle>
+            <Link to="/crawler/backend-info" className="inline-flex items-center text-sm text-blue-600 hover:text-blue-800">
+              <InfoIcon className="h-4 w-4 mr-1" />
+              Backend Integration
+            </Link>
+          </div>
+          <CardDescription>
+            This crawler currently runs with simulated data. See Backend Integration for Spring Boot setup.
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div>

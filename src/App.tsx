@@ -7,6 +7,7 @@ import ComparePage from '@/pages/ComparePage';
 import Search from '@/pages/Search';
 import NotFound from '@/pages/NotFound';
 import WebCrawler from '@/components/webCrawler/WebCrawler';
+import WebCrawlerBackendInfo from '@/components/webCrawler/WebCrawlerBackendInfo';
 import { Toaster } from "@/components/ui/toaster";
 
 // App component
@@ -19,6 +20,7 @@ const App: React.FC = () => {
         <Route path="/compare" element={<ComparePage />} />
         <Route path="/search" element={<Search />} />
         <Route path="/crawler" element={<WebCrawler />} />
+        <Route path="/crawler/backend-info" element={<WebCrawlerBackendInfo />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Toaster />
