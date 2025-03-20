@@ -86,6 +86,12 @@
   }
 }
 
+/* Hero section background styles */
+.pattern-bg {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
 /* Custom animations */
 .slide-enter {
   opacity: 0;

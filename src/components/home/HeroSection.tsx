@@ -1,4 +1,3 @@
-
 import React from 'react';
 import SearchBar from '@/components/ui/SearchBar';
 import { ChevronDown } from 'lucide-react';
@@ -12,7 +11,12 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-background to-muted/50 pt-20 pb-16">
+    <section className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-background/90 to-muted/50 pt-20 pb-16">
+      <div 
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-20" 
+        style={{ backgroundImage: 'url("/lovable-uploads/f89e074e-124a-4941-b384-7e0edc733fd9.png")' }}
+      />
+      
       <div className="absolute inset-0 pattern-bg opacity-[0.02] pointer-events-none" />
       <div className="container mx-auto px-4 z-10">
         <div className="max-w-4xl mx-auto text-center">
@@ -57,7 +61,6 @@ const HeroSection: React.FC = () => {
         </div>
       </div>
       
-      {/* Scroll indicator */}
       <button 
         onClick={scrollToContent}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center text-muted-foreground hover:text-foreground transition-colors animate-pulse-soft"
@@ -66,9 +69,8 @@ const HeroSection: React.FC = () => {
         <ChevronDown className="w-5 h-5" />
       </button>
       
-      {/* Background gradient circles */}
-      <div className="absolute top-1/4 left-1/5 w-96 h-96 rounded-full bg-primary/20 filter blur-[100px] opacity-50 pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/5 w-96 h-96 rounded-full bg-primary/10 filter blur-[100px] opacity-40 pointer-events-none" />
+      <div className="absolute top-1/4 left-1/5 w-96 h-96 rounded-full bg-primary/20 filter blur-[100px] opacity-30 pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/5 w-96 h-96 rounded-full bg-primary/10 filter blur-[100px] opacity-20 pointer-events-none" />
     </section>
   );
 };
