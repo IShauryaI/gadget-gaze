@@ -1,69 +1,62 @@
-# Welcome to your Lovable project
+# Gadget Gaze — Product Discovery & Showcase Platform
 
-## Project info
+[![Build Status](https://img.shields.io/github/workflow/status/IShauryaI/gadget-gaze/CI)](https://github.com/IShauryaI/gadget-gaze/actions)
+[![License](https://img.shields.io/github/license/IShauryaI/gadget-gaze)](LICENSE)
 
-**URL**: https://lovable.dev/projects/b369d50e-4fe1-4411-b74a-a4166148e504
+## Overview
 
-## How can I edit this code?
+A modern product discovery platform for exploring and showcasing the latest technology gadgets and electronics. Built with React and TypeScript, featuring an intuitive interface for browsing products, detailed specifications, and user reviews.
 
-There are several ways of editing your application.
+## Features
 
-**Use Lovable**
+- **Product Discovery** - Browse curated collections of latest tech gadgets
+- **Detailed Specifications** - Comprehensive product information and comparisons
+- **User Reviews** - Community-driven ratings and feedback system
+- **Search & Filter** - Advanced filtering by category, price, and features
+- **Responsive Design** - Optimized for mobile and desktop experiences
+- **Product Wishlist** - Save and organize favorite products
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/b369d50e-4fe1-4411-b74a-a4166148e504) and start prompting.
+## Tech Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+**Frontend**: TypeScript, React 18, Vite  
+**UI Framework**: Tailwind CSS, shadcn/ui  
+**State Management**: React Hook Form, Context API  
+**Build Tool**: Vite with SWC  
+**Deployment**: Vercel/Netlify
 
-**Use your preferred IDE**
+## Getting Started
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Prerequisites
+- Node.js 18+
+- npm, yarn, or pnpm
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Installation
+```bash
+# Clone the repository
+git clone https://github.com/IShauryaI/gadget-gaze.git
 
-Follow these steps:
+# Navigate to project directory
+cd gadget-gaze
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Install dependencies
+npm install
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### Available Scripts
+```bash
+npm run dev        # Start development server
+npm run build      # Build for production
+npm run lint       # Run ESLint
+npm run preview    # Preview production build
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Contributing
 
-**Use GitHub Codespaces**
+Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for development guidelines.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## License
 
-## What technologies are used for this project?
-
-This project is built with .
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/b369d50e-4fe1-4411-b74a-a4166148e504) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+This project is licensed under the MIT License - see [LICENSE](LICENSE) file for details.
